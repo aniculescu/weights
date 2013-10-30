@@ -24,19 +24,6 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/main.css">
 
-<style>
-
-body{margin: 4px;}
-#weightsForm{padding: 4px;border: 1px solid #a3a09f;border-radius: 5px;display: inline-block;}
-#weightTable{border: 1px solid #a3a09f;}
-#weightTable tr.day-a{background: #a8babb;}
-#weightTable tr.day-b{background: #d6d2c8;}
-#weightTable tr.day-a.day-b{background: #c1cbc7;}
-#weightTable tr th,
-#weightTable tr td{padding: 3px;}
-
-</style>
-
 <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
 </head>
@@ -45,7 +32,7 @@ body{margin: 4px;}
 
 <!-- Add your site or application content here -->
 <form action="/index.php" id="weightsForm">
-    <table id="weightTable" cellspacing="0" cellpadding="0" border="0" width="300">
+    <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
         <thead>
             <tr>
                 <th>Exercise</th>
@@ -56,7 +43,7 @@ body{margin: 4px;}
         <tbody>
             <tr class="day-a day-b">
                 <td>Squats</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -67,7 +54,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a">
                 <td>Bench Press</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -78,7 +65,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-b">
                 <td>Deadlift</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -89,7 +76,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-b">
                 <td>Standing Press</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -100,7 +87,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a day-b">
                 <td>Bent Over Row</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -111,7 +98,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a">
                 <td>Barbell Shrugs</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -122,7 +109,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-b">
                 <td>Close Grip Bench Press</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -133,7 +120,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a">
                 <td>Tricep Extensions</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -144,7 +131,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a day-b">
                 <td>Incline Curls</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -155,7 +142,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a">
                 <td>Hyperexentions</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -166,7 +153,7 @@ body{margin: 4px;}
             </tr>
             <tr class="day-a day-b">
                 <td>Cable Crunches</td>
-                <td>120</td>
+                <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <option value="5">5</option>
@@ -177,6 +164,14 @@ body{margin: 4px;}
             </tr>
         </tbody>
     </table>
+    <div class="footer-links">
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+        <div>
+            <a href="status.php">Stats</a>
+        </div>
+    </div>
 </form>
 
 <script src="js/vendor/zepto.min.js"></script>
