@@ -1,3 +1,8 @@
+<?php
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+?>
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
@@ -31,7 +36,7 @@
 <body>
 
 <!-- Add your site or application content here -->
-<form action="/index.php" id="weightsForm">
+<form action="index.php" id="weightsForm" method="POST">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
         <thead>
             <tr>
