@@ -1,8 +1,3 @@
-<?php
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-?>
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
@@ -35,8 +30,24 @@ echo "</pre>";
 
 <body>
 
+<?php
+
+$weightDropdown = '';
+for($i=0;$i<=500;$i+=5){
+    $weightDropdown .= "<option value=\"$i\">$i</option>\n";
+}
+
+//xdebug_break();
+
+echo "<pre>";
+print_r($_POST);
+// print_r($weightDropdown);
+echo "</pre>";
+
+?>
+
 <!-- Add your site or application content here -->
-<form action="index.php" id="weightsForm" method="POST">
+<form action="submit.php" id="weightsForm" method="POST">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
         <thead>
             <tr>
@@ -51,9 +62,7 @@ echo "</pre>";
                 <td class="previous">120</td>
                 <td>
                     <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -61,10 +70,8 @@ echo "</pre>";
                 <td>Bench Press</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exBenchPress" id="exBenchPress">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -72,10 +79,8 @@ echo "</pre>";
                 <td>Deadlift</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exDeadlift" id="exDeadlift">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -83,10 +88,8 @@ echo "</pre>";
                 <td>Standing Press</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exStandingPress" id="exStandingPress">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -94,10 +97,8 @@ echo "</pre>";
                 <td>Bent Over Row</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exBentOverRows" id="exBentOverRows">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -105,10 +106,8 @@ echo "</pre>";
                 <td>Barbell Shrugs</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exBarbellShrugs" id="exBarbellShrugs">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -116,10 +115,8 @@ echo "</pre>";
                 <td>Close Grip Bench Press</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exCloseGripBenchPress" id="exCloseGripBenchPress">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -127,10 +124,8 @@ echo "</pre>";
                 <td>Tricep Extensions</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exTricepExtensions" id="exTricepExtensions">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -138,10 +133,8 @@ echo "</pre>";
                 <td>Incline Curls</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exInclineCurls" id="exInclineCurls">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -149,10 +142,8 @@ echo "</pre>";
                 <td>Hyperexentions</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exHyperextensions" id="exHyperextensions">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
@@ -160,15 +151,14 @@ echo "</pre>";
                 <td>Cable Crunches</td>
                 <td class="previous">120</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
+                    <select name="exCableCrunches" id="exCableCrunches">
+                        <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
         </tbody>
     </table>
+    <input type="hidden" value="Russell" id="user_id" name="user_id">
     <div class="footer-links">
         <div>
             <button type="submit">Submit</button>
@@ -181,6 +171,7 @@ echo "</pre>";
 
 <script src="js/vendor/zepto.min.js"></script>
 <script src="js/helper.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
