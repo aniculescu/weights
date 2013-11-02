@@ -1,90 +1,96 @@
-function weightSubmit() {
+/* Extend localStorage Functionality */
+Storage.prototype.setObject = function(key, value) { 
+    this.setItem(key, JSON.stringify(value)); 
+}
+Storage.prototype.getObject = function(key) { 
+    var value = this.getItem(key);
+    return value && JSON.parse(value); 
+}
 
-    /* Extend localStorage Functionality */
-    Storage.prototype.setObject = function(key, value) { 
-        this.setItem(key, JSON.stringify(value)); 
-    }
-    Storage.prototype.getObject = function(key) { 
-        var value = this.getItem(key);
-        return value && JSON.parse(value); 
-    }
+var _localStorageData = localStorage.getObject('toBeSent') || [];
+var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
 
-    var _retryConnectionInterval = 1 * 60 * 1000,
-        _ajaxTimeout = 30 * 1000;
-    this.toBeSent = localStorage.getObject('toBeSent') || [];
-    // this.toBeSent = [];
+(function(){
 
-    // console.log(this);
-    // console.log(this.russell);
-    
-    $('#weightsForm').submit(function() {
-        var data = {},
-            parent = $(this);
+    function weightSubmit() {
 
-        $('select, input[type=text]', parent).each(function(){
-            data[$(this).attr('name')] = $(this).val();
+        /* Set function-wide variables and defaults */
+        var _retryConnectionInterval = 1 * 60 * 1000,
+            _ajaxTimeout = 30 * 1000;
+        // this.toBeSent = [];
+
+        
+        $('#weightsForm').submit(function() {
+            var formData = {},
+                parent = $(this);
+
+            $('select, input[type=text]', parent).each(function(){
+                formData[$(this).attr('name')] = $(this).val();
+            });
+
+            _localStorageData.push(formData);
+            localStorage.setObject('toBeSent', _localStorageData);
+
+            // localStorage.setObject('toBeSent', []);
+            showPreviousWeight();
+            return false;
+
         });
 
-        // console.log('Submit clicked');
-        // console.log(data);
-
-        // console.log('this.teBeSent');
-        // console.log(weightSubmit.toBeSent);
-
-        weightSubmit.toBeSent.push(data);
-        localStorage.setObject('toBeSent', weightSubmit.toBeSent);
-
-        console.log('localStorage');
-        console.log(localStorage);
-        // console.log(localStorage.toBeSent);
-
-        // localStorage.setObject('toBeSent', []);
-        return false;
-
-    });
-
-    function _sendAjaxData(data,i){
-        var ajaxOptions = {
-            type:'POST',
-            url:'submit.php',
-            data:{'data':escape(JSON.stringify(data[0]))},
-            timeout : _ajaxTimeout,
-            success : function(response) {
-                if(response.result == "success"){
-                    //console.log(response);
-                    //console.log(data);
-                    //console.log('Data sent; item removed from localStorage');
-                    weightSubmit.toBeSent.splice(0, 1);
-                    localStorage.setObject('toBeSent',weightSubmit.toBeSent);
-                    
-                    //console.log('Success: Data sent; localStorage HAS been modified')
-                    _localStorageConnectionLoop();
-                } else {
-                    //console.log('PHP Error: Data NOT sent; localStorage NOT modified')
+        /* Attempt sending data via AJAX to MySQL db */
+        function _sendAjaxData(data,i){
+            var ajaxOptions = {
+                type:'POST',
+                url:'submit.php',
+                data: { 'data' : escape(JSON.stringify(data))},
+                timeout : _ajaxTimeout,
+                success : function(response) {
+                    if(response.result == "success"){
+                        _localStorageData.splice(0, 1);
+                        localStorage.setObject('toBeSent',_localStorageData);
+                        
+                        _localStorageConnectionLoop();
+                    } else {
+                    }
+                },
+                error:function() {
+                    // Do nothing
                 }
-            },
-            error:function() {
-                // Do nothing
-                //console.log('Error: Data NOT sent; localStorage NOT cleared')
-            }
-        };
-        $.ajax(ajaxOptions);
-    }
-
-    function _localStorageConnectionLoop(){
-        //console.log('Trying to send data');
-        if(weightSubmit.toBeSent.length > 0){ 
-            //console.log('localStorage has content. ' + toBeSent.length + ' entries.');  
-            _sendAjaxData(weightSubmit.toBeSent);  
-        } else {
-            //console.log('localStorage has NO content');  
+            };
+            $.ajax(ajaxOptions);
         }
-    }
 
-    setInterval(_localStorageConnectionLoop, _retryConnectionInterval);
+        /* Loop responsible for sending each entry in localStorage */
+        function _localStorageConnectionLoop(){
+            if(_localStorageData.length > 0){ 
+                _sendAjaxData(_localStorageData[0]);  
+            } else {
+            }
+        }
 
-    this.storageArray = localStorage.getObject('toBeSent') || [];
+        setInterval(_localStorageConnectionLoop, _retryConnectionInterval);
 
-} //ipadSignup()
+        // this.storageArray = localStorage.getObject('toBeSent') || [];
 
-var weightSubmit = new weightSubmit();
+    } //weightSubmit()
+
+    var weightSubmit = new weightSubmit();
+
+    function showPreviousWeight(){
+        var newMaxWeights = {};
+        for(i=0;i<_localStorageData.length;i++){
+            var exerciseStats = _localStorageData[i];
+            for(var propertyName in exerciseStats) {
+                var weight = exerciseStats[propertyName];
+                if((propertyName.indexOf("ex") == 0) && weight > 0){
+                    newMaxWeights[propertyName] = weight;
+                    $("#" + propertyName).parent().prev().html(weight);
+                   // you can get the value like this: myObject[propertyName]
+                }
+            }
+        }
+        localStorage.setObject('maxWeights', newMaxWeights);
+    } //showPreviousWeight()
+    showPreviousWeight();
+
+})();
