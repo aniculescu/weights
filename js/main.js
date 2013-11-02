@@ -1,45 +1,61 @@
 function weightSubmit() {
 
-    var _myScroll;
-    var _success = false;
-    var _retryConnectionInterval = 1 * 60 * 1000;
-    var _ajaxTimeout = 30 * 1000;
+    /* Extend localStorage Functionality */
+    Storage.prototype.setObject = function(key, value) { 
+        this.setItem(key, JSON.stringify(value)); 
+    }
+    Storage.prototype.getObject = function(key) { 
+        var value = this.getItem(key);
+        return value && JSON.parse(value); 
+    }
+
+    var _retryConnectionInterval = 1 * 60 * 1000,
+        _ajaxTimeout = 30 * 1000;
+    this.toBeSent = localStorage.getObject('toBeSent') || [];
+    // this.toBeSent = [];
+
+    // console.log(this);
+    // console.log(this.russell);
     
-    this.init = function() {
-        $('#weightsForm').submit(function() {
-            alert('yes');
-            var data = {};
-            var parent = $(this);
-            var email = '';
-            $('select', parent).each(function(){
-                if($(this).val().length == 0) {
-                    valid = false;
-                } else {
-                    data[$(this).attr('name')] = $(this).val();
-                    if($(this).attr('name') == 'email') 
-                        email = $(this).val();
-                }
-            });
-            return false;
+    $('#weightsForm').submit(function() {
+        var data = {},
+            parent = $(this);
+
+        $('select, input[type=text]', parent).each(function(){
+            data[$(this).attr('name')] = $(this).val();
         });
-        
-        $('#weightsForm')
-    };
+
+        // console.log('Submit clicked');
+        // console.log(data);
+
+        // console.log('this.teBeSent');
+        // console.log(weightSubmit.toBeSent);
+
+        weightSubmit.toBeSent.push(data);
+        localStorage.setObject('toBeSent', weightSubmit.toBeSent);
+
+        console.log('localStorage');
+        console.log(localStorage);
+        // console.log(localStorage.toBeSent);
+
+        // localStorage.setObject('toBeSent', []);
+        return false;
+
+    });
 
     function _sendAjaxData(data,i){
         var ajaxOptions = {
             type:'POST',
-            url:'../wildstar_comiccon/global/includes/php/event_signup.php',
+            url:'submit.php',
             data:{'data':escape(JSON.stringify(data[0]))},
-            timeout: _ajaxTimeout,
-            success:function(response) {
+            timeout : _ajaxTimeout,
+            success : function(response) {
                 if(response.result == "success"){
                     //console.log(response);
                     //console.log(data);
                     //console.log('Data sent; item removed from localStorage');
-                    var toBeSent = localStorage.getObject('toBeSent');
-                    toBeSent.splice(0, 1);
-                    localStorage.setObject('toBeSent',toBeSent);
+                    weightSubmit.toBeSent.splice(0, 1);
+                    localStorage.setObject('toBeSent',weightSubmit.toBeSent);
                     
                     //console.log('Success: Data sent; localStorage HAS been modified')
                     _localStorageConnectionLoop();
@@ -57,22 +73,12 @@ function weightSubmit() {
 
     function _localStorageConnectionLoop(){
         //console.log('Trying to send data');
-        var toBeSent = localStorage.getObject('toBeSent') || [];
-        if(toBeSent.length > 0){ 
+        if(weightSubmit.toBeSent.length > 0){ 
             //console.log('localStorage has content. ' + toBeSent.length + ' entries.');  
-            _sendAjaxData(toBeSent);  
+            _sendAjaxData(weightSubmit.toBeSent);  
         } else {
             //console.log('localStorage has NO content');  
         }
-    }
-
-    /* Extend localStorage Functionality */
-    Storage.prototype.setObject = function(key, value) { 
-        this.setItem(key, JSON.stringify(value)); 
-    }
-    Storage.prototype.getObject = function(key) { 
-        var value = this.getItem(key);
-        return value && JSON.parse(value); 
     }
 
     setInterval(_localStorageConnectionLoop, _retryConnectionInterval);

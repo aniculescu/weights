@@ -3,6 +3,8 @@
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 
+<!-- Russell Note: Try AngularJS -->    
+    
 <meta charset="utf-8">
 <title></title>
 <meta name="description" content="">
@@ -37,26 +39,28 @@ for($i=0;$i<=500;$i+=5){
     $weightDropdown .= "<option value=\"$i\">$i</option>\n";
 }
 
-//xdebug_break();
-
-echo "<pre>";
-print_r($_POST);
-// print_r($weightDropdown);
-echo "</pre>";
-
 ?>
 
 <!-- Add your site or application content here -->
 <form action="submit.php" id="weightsForm" method="POST">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
-        <thead>
+        <!-- <thead>
             <tr>
                 <th>Exercise</th>
                 <th>Previous</th>
                 <th>Today</th>
             </tr>
-        </thead>
+        </thead> -->
         <tbody>
+            <tr>
+                <td class="name">Name:</td>
+                <td colspan="2">
+                    <select name="user_id" id="user_id" style="width: 100%;">
+                        <option value="2">Russell</option>
+                        <option value="1">Andrew</option>
+                    </select>
+                </td>
+            </tr>
             <tr class="day-a day-b">
                 <td>Squats</td>
                 <td class="previous">120</td>
