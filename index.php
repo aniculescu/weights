@@ -143,7 +143,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a">
-                <td>Hyperexentions</td>
+                <td>Hyperextensions</td>
                 <td class="previous">0</td>
                 <td>
                     <select name="exHyperextensions" id="exHyperextensions">

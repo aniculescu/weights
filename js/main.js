@@ -17,8 +17,6 @@ var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
         /* Set function-wide variables and defaults */
         var _retryConnectionInterval = 1 * 60 * 1000,
             _ajaxTimeout = 30 * 1000;
-        // this.toBeSent = [];
-
         
         $('#weightsForm').submit(function() {
             var formData = {},
@@ -35,6 +33,11 @@ var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
             showPreviousWeight();
             return false;
 
+        });
+
+        /* Show previous weight for selected user */
+        $('#user_id').change(function(){
+            showPreviousWeight();
         });
 
         /* Attempt sending data via AJAX to MySQL db */
@@ -64,28 +67,30 @@ var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
         function _localStorageConnectionLoop(){
             if(_localStorageData.length > 0){ 
                 _sendAjaxData(_localStorageData[0]);  
-            } else {
             }
+            setInterval(_localStorageConnectionLoop, _retryConnectionInterval);
         }
-
-        setInterval(_localStorageConnectionLoop, _retryConnectionInterval);
-
-        // this.storageArray = localStorage.getObject('toBeSent') || [];
-
     } //weightSubmit()
 
     var weightSubmit = new weightSubmit();
 
     function showPreviousWeight(){
-        var newMaxWeights = {};
+        var newMaxWeights = {}
+            currentUser = $('#user_id').val();
+            console.log("current");
+            console.log(currentUser);
         for(i=0;i<_localStorageData.length;i++){
             var exerciseStats = _localStorageData[i];
-            for(var propertyName in exerciseStats) {
-                var weight = exerciseStats[propertyName];
-                if((propertyName.indexOf("ex") == 0) && weight > 0){
-                    newMaxWeights[propertyName] = weight;
-                    $("#" + propertyName).parent().prev().html(weight);
-                   // you can get the value like this: myObject[propertyName]
+            // console.log(exerciseStats);
+            if(currentUser == exerciseStats.user_id){
+                console.log(exerciseStats.user_id);
+                for(var propertyName in exerciseStats) {
+                    var weight = exerciseStats[propertyName];
+                    if((propertyName.indexOf("ex") == 0) && weight > 0){
+                        newMaxWeights[propertyName] = weight;
+                        $("#" + propertyName).parent().prev().html(weight);
+                       // you can get the value like this: myObject[propertyName]
+                    }
                 }
             }
         }
