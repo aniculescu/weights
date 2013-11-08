@@ -137,4 +137,11 @@ var _localStorageData = localStorage.getObject('toBeSent') || [];
     } //showPreviousWeight()
     showPreviousWeight();
 
+    //Show localStorage converted to SJON
+    $('#showJson').click(function(){
+        $('#jsonOutput').html(JSON.stringify(_localStorageData)).toggle();
+        return false;
+    })
+    // console.log();
+
 })();

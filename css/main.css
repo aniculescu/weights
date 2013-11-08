@@ -46,7 +46,8 @@ body{}
 #weightTable tr.date{color: #000;text-shadow: none;}
 #weightTable tr td.previous{text-align: center;}
 #weightTable tr td.second-time{box-shadow: 0 0 3px #000000 inset;}
-.footer-links{padding: 10px 0;text-align: center;}
+#jsonOutput {display: none;height: 300px; width: 100%; }
+.footerLinks{padding: 10px 0;text-align: center;}
 
 
 

@@ -199,15 +199,18 @@ for($i=0;$i<=500;$i+=5){
         </tbody>
     </table>
     <input type="hidden" value="Russell" id="user_id" name="user_id">
-    <div class="footer-links">
+    <div class="footerLinks">
         <div>
             <button type="submit">Submit</button>
         </div>
         <div>
-            <a href="status.php">Stats</a>
+            <!-- <a href="status.php">Stats</a> -->
+            <a id="showJson" href="#">Show JSON</a>
         </div>
     </div>
+    <textarea id="jsonOutput"></textarea>
 </form>
+
 
 <script src="js/vendor/zepto.min.js"></script>
 <script src="js/helper.js"></script>
