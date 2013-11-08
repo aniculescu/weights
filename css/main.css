@@ -33,26 +33,20 @@ textarea {resize: vertical; }
 
 body{}
 #weightsForm{}
-#weightsForm{width: 320px;} /* Temporary for desktop development */
-#weightTable{width: 100%;font-size: 20px;color: #fff;font-weight: bold;}
+#weightTable{width: 100%;font-size: 20px;font-weight: bold;}
 #weightTable tr.day-a{background: #fe2200;}
 #weightTable tr.day-b{background: #f7eb00;}
 #weightTable tr.day-a.day-b{background: #fa8a00;}
 #weightTable tr th{color: #000;font-size: 0.75em;}
 #weightTable tr th,
 #weightTable tr td{padding: 8px 3px;}
-#weightTable tr td{text-shadow: 0 0 6px rgba(0,0,0,0.4);}
-#weightTable tr td.name{color: #000;text-shadow: none;}
+#weightTable tr td div.lift-name{font-size: 20px;color: #fff;font-weight: bold;text-shadow: 0 0 6px rgba(0,0,0,0.4);}
+#weightTable tr td div.set-details{font-size: 12px;color: #000;}
+#weightTable tr td.name,
+#weightTable tr.date{color: #000;text-shadow: none;}
 #weightTable tr td.previous{text-align: center;}
+#weightTable tr td.second-time{box-shadow: 0 0 3px #000000 inset;}
 .footer-links{padding: 10px 0;text-align: center;}
-
-
-
-
-
-
-
-
 
 
 
@@ -92,6 +86,11 @@ textarea[contenteditable] {-webkit-appearance: none; }
    Theses examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
+
+@media only screen and (min-width: 600px) {
+    /* Style adjustments for viewports that meet the condition */
+    #weightsForm{width: 320px;} /* Temporary for desktop development */
+}
 
 @media only screen and (min-width: 800px) {
     /* Style adjustments for viewports that meet the condition */

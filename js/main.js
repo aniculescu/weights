@@ -8,7 +8,7 @@ Storage.prototype.getObject = function(key) {
 }
 
 var _localStorageData = localStorage.getObject('toBeSent') || [];
-var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
+// var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
 
 (function(){
 
@@ -38,6 +38,24 @@ var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
         /* Show previous weight for selected user */
         $('#user_id').change(function(){
             showPreviousWeight();
+        });
+
+        /* Hide A days when selecting Deadlift */
+        $('#exDeadlift').change(function(){
+            var aDays = $('tr.day-a:not(.day-b)');
+            if($(this).val() > 0)
+                aDays.hide();
+            else
+                aDays.show();
+        });
+
+        /* Hide B days when selecting Bench */
+        $('#exBenchPress').change(function(){
+            var bBays = $('tr.day-b:not(.day-a)');
+            if($(this).val() > 0)
+                bBays.hide();
+            else
+                bBays.show();
         });
 
         /* Attempt sending data via AJAX to MySQL db */
@@ -75,26 +93,47 @@ var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
     var weightSubmit = new weightSubmit();
 
     function showPreviousWeight(){
-        var newMaxWeights = {}
+        var newMaxWeights = {},
+            prevMaxWeights = {},
             currentUser = $('#user_id').val();
-            console.log("current");
-            console.log(currentUser);
-        for(i=0;i<_localStorageData.length;i++){
+            // console.log("current: " + currentUser);
+
+        $('td.previous-weight').html('0').removeClass('second-time');
+
+        for(var i=0;i<_localStorageData.length;i++){
             var exerciseStats = _localStorageData[i];
+            // console.log("exerciseStats: ");
             // console.log(exerciseStats);
             if(currentUser == exerciseStats.user_id){
-                console.log(exerciseStats.user_id);
+                // console.log(exerciseStats.user_id);
                 for(var propertyName in exerciseStats) {
+                    // console.log("Starting for loop-----------");
+                    // console.log(prevMaxWeights);
+                    // console.log(newMaxWeights);
                     var weight = exerciseStats[propertyName];
+                    var prevWeightCell = $("#" + propertyName).parent().prev();
+
+                    // Add weight to list of most recent weights lifted 
                     if((propertyName.indexOf("ex") == 0) && weight > 0){
                         newMaxWeights[propertyName] = weight;
-                        $("#" + propertyName).parent().prev().html(weight);
-                       // you can get the value like this: myObject[propertyName]
+                        prevWeightCell.html(weight);
                     }
+
+                    // TODO: Highlight second time in a row
+                    // if(prevMaxWeights[propertyName] == newMaxWeights[propertyName]){
+                    //     prevWeightCell.addClass('second-time');
+                    // } else {
+                    //     prevWeightCell.removeClass('second-time');
+                    // }
+                    // prevMaxWeights = newMaxWeights;
                 }
-            }
+            } // else {
+              //     $('td.previous-weight').html('0');
+              // }
         }
-        localStorage.setObject('maxWeights', newMaxWeights);
+        // console.log("newMaxWeights");
+        // console.log(newMaxWeights);
+        // localStorage.setObject('maxWeights', newMaxWeights);
     } //showPreviousWeight()
     showPreviousWeight();
 

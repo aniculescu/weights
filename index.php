@@ -62,8 +62,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a day-b">
-                <td>Squats</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Squats</div>
+                    <div class="set-details">5x5</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exSquat" id="exSquat">
                         <?php echo $weightDropdown; ?>
@@ -71,8 +74,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a">
-                <td>Bench Press</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Bench Press</div>
+                    <div class="set-details">5x5</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exBenchPress" id="exBenchPress">
                         <?php echo $weightDropdown; ?>
@@ -80,8 +86,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-b">
-                <td>Deadlift</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Deadlift</div>
+                    <div class="set-details">1x5</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exDeadlift" id="exDeadlift">
                         <?php echo $weightDropdown; ?>
@@ -89,8 +98,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-b">
-                <td>Standing Press</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Standing Press</div>
+                    <div class="set-details">5x5</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exStandingPress" id="exStandingPress">
                         <?php echo $weightDropdown; ?>
@@ -98,8 +110,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a day-b">
-                <td>Bent Over Row</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Bent Over Row</div>
+                    <div class="set-details">5x5</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exBentOverRows" id="exBentOverRows">
                         <?php echo $weightDropdown; ?>
@@ -107,8 +122,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a">
-                <td>Barbell Shrugs</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Barbell Shrugs</div>
+                    <div class="set-details">3x8</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exBarbellShrugs" id="exBarbellShrugs">
                         <?php echo $weightDropdown; ?>
@@ -116,8 +134,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-b">
-                <td>Close Grip Bench Press</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Close Grip Bench Press</div>
+                    <div class="set-details">3x8</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exCloseGripBenchPress" id="exCloseGripBenchPress">
                         <?php echo $weightDropdown; ?>
@@ -125,8 +146,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a">
-                <td>Tricep Extensions</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Tricep Extensions</div>
+                    <div class="set-details">3x8</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exTricepExtensions" id="exTricepExtensions">
                         <?php echo $weightDropdown; ?>
@@ -134,8 +158,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a day-b">
-                <td>Incline Curls</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Incline Curls</div>
+                    <div class="set-details">3x8</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exInclineCurls" id="exInclineCurls">
                         <?php echo $weightDropdown; ?>
@@ -143,8 +170,11 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a">
-                <td>Hyperextensions</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Hyperextensions</div>
+                    <div class="set-details">2x10</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exHyperextensions" id="exHyperextensions">
                         <?php echo $weightDropdown; ?>
@@ -152,13 +182,19 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="day-a day-b">
-                <td>Cable Crunches</td>
-                <td class="previous">0</td>
+                <td>
+                    <div class="lift-name">Cable Crunches</div>
+                    <div class="set-details">3x10</div>
+                </td>
+                <td class="previous-weight">0</td>
                 <td>
                     <select name="exCableCrunches" id="exCableCrunches">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
+            </tr>
+            <tr class="date">
+                <td colspan="3">Date <input id="current-date" name="current-date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
             </tr>
         </tbody>
     </table>
