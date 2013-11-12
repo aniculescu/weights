@@ -194,7 +194,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
             </tr>
             <tr class="date">
-                <td colspan="3">Date <input id="current-date" name="current-date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
+                <td colspan="3">Date <input id="date" name="date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
             </tr>
         </tbody>
     </table>
