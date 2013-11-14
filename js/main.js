@@ -10,8 +10,6 @@ Storage.prototype.getObject = function(key) {
 var _localStorageData = localStorage.getObject('toBeSent') || [];
 // var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
 
-(function(){
-
 function weightSubmit() {
 
     /* Set function-wide variables and defaults */
@@ -26,6 +24,9 @@ function weightSubmit() {
             formData[$(this).attr('name')] = $(this).val();
         });
 
+        /* Make sure to update data in case data has been added since the last page refresh
+           such as when submitting data in another tab */
+        _localStorageData = localStorage.getObject('toBeSent') || [];
         _localStorageData.push(formData);
         localStorage.setObject('toBeSent', _localStorageData);
 
@@ -90,7 +91,7 @@ function weightSubmit() {
     }
 } //weightSubmit()
 
-    var weightSubmit = new weightSubmit();
+var weightSubmit = new weightSubmit();
 
 function showPreviousWeight(){
     var newMaxWeights = {},
