@@ -10,10 +10,19 @@ print_r($_POST);
 // print_r($weightDropdown);
 echo "</pre>";
 
-//For each exercise, check if not zero, then commit to db (checking for errors)
+//$whichService = $_POST['service'];
+//$postData = $_POST;
 
-$submitWeights->addExercise($_POST(user_id),3,150);
+//switch ($whichService) {
+//    case 'addWorkout':
+//        $newWorkout = new Weights();
+//        $newWorkout->addExercise($postData);
+//        break;
+//    default:
+//        break;
+//}
 
-//print_r(Weights);
+$newWorkout = new Weights();
+$newWorkout->addWorkout($_POST);
 
 ?>

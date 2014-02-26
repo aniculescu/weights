@@ -2,7 +2,7 @@
 <!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-
+    
 <!-- Russell Note: Try AngularJS -->    
     
 <meta charset="utf-8">
@@ -44,14 +44,7 @@ for($i=0;$i<=500;$i+=5){
 <!-- Add your site or application content here -->
 <form action="submit.php" id="weightsForm" method="POST">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
-        <!-- <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Previous</th>
-                <th>Today</th>
-            </tr>
-        </thead> -->
-        <tbody>
+        <thead>
             <tr>
                 <td class="name">Name:</td>
                 <td colspan="2">
@@ -61,6 +54,13 @@ for($i=0;$i<=500;$i+=5){
                     </select>
                 </td>
             </tr>
+            <tr>
+                <th>Exercise</th>
+                <th>Previous</th>
+                <th>Today</th>
+            </tr>
+        </thead>
+        <tbody>
             <tr class="day-a day-b">
                 <td>
                     <div class="lift-name">Squats</div>
@@ -68,7 +68,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exSquat" id="exSquat">
+                    <select name="1" id="1">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -80,7 +80,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exBenchPress" id="exBenchPress">
+                    <select name="11" id="11">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -92,7 +92,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exDeadlift" id="exDeadlift">
+                    <select name="2" id="2">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -104,7 +104,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exStandingPress" id="exStandingPress">
+                    <select name="3" id="3">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -116,7 +116,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exBentOverRows" id="exBentOverRows">
+                    <select name="4" id="4">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -128,7 +128,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exBarbellShrugs" id="exBarbellShrugs">
+                    <select name="5" id="5">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -140,7 +140,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exCloseGripBenchPress" id="exCloseGripBenchPress">
+                    <select name="6" id="6">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -152,7 +152,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exTricepExtensions" id="exTricepExtensions">
+                    <select name="7" id="7">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -164,7 +164,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exInclineCurls" id="exInclineCurls">
+                    <select name="8" id="8">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -176,7 +176,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exHyperextensions" id="exHyperextensions">
+                    <select name="9" id="9">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -188,7 +188,7 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="exCableCrunches" id="exCableCrunches">
+                    <select name="10" id="10">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -198,7 +198,6 @@ for($i=0;$i<=500;$i+=5){
             </tr>
         </tbody>
     </table>
-    <input type="hidden" value="Russell" id="user_id" name="user_id">
     <div class="footerLinks">
         <div>
             <button type="submit">Submit</button>

@@ -8,7 +8,6 @@ Storage.prototype.getObject = function(key) {
 }
 
 var _localStorageData = localStorage.getObject('toBeSent') || [];
-// var _localStorageMaxWeights = localStorage.getObject('maxWeights') || [];
 
 function weightSubmit() {
 
@@ -16,25 +15,25 @@ function weightSubmit() {
     var _retryConnectionInterval = 1 * 60 * 1000,
         _ajaxTimeout = 30 * 1000;
     
-    $('#weightsForm').submit(function() {
-        var formData = {},
-            parent = $(this);
-
-        $('select, input[type=text]', parent).each(function(){
-            formData[$(this).attr('name')] = $(this).val();
-        });
-
-        /* Make sure to update data in case data has been added since the last page refresh
-           such as when submitting data in another tab */
-        _localStorageData = localStorage.getObject('toBeSent') || [];
-        _localStorageData.push(formData);
-        localStorage.setObject('toBeSent', _localStorageData);
-
-        // localStorage.setObject('toBeSent', []);
-        showPreviousWeight();
-        return false;
-
-    });
+//    $('#weightsForm').submit(function() {
+//        var formData = {},
+//            parent = $(this);
+//
+//        $('select, input[type=text]', parent).each(function(){
+//            formData[$(this).attr('name')] = $(this).val();
+//        });
+//
+//        /* Make sure to update data in case data has been added since the last page refresh
+//           such as when submitting data in another tab */
+//        _localStorageData = localStorage.getObject('toBeSent') || [];
+//        _localStorageData.push(formData);
+//        localStorage.setObject('toBeSent', _localStorageData);
+//
+//        // localStorage.setObject('toBeSent', []);
+//        showPreviousWeight();
+//        return false;
+//
+//    });
 
     /* Show previous weight for selected user */
     $('#user_id').change(function(){
@@ -90,8 +89,7 @@ function weightSubmit() {
         setInterval(_localStorageConnectionLoop, _retryConnectionInterval);
     }
 } //weightSubmit()
-
-var weightSubmit = new weightSubmit();
+weightSubmit();
 
 function showPreviousWeight(){
     var newMaxWeights = {},
@@ -146,6 +144,7 @@ $('#showJson').click(function(){
 
 (function(){
 
+    /* Set date input field value using Javascript to reflect local date and time */
     var dateString = '',
         currentDate = new Date()
         currentDay = currentDate.getDate(),
