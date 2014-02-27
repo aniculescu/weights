@@ -26,18 +26,29 @@ class Weights
             // If data does not exist, add new row
             $insertQuery = "INSERT INTO schedule (date, user_id, exercise_id, weight) VALUES ('{$date}',{$user_id},{$exercise},{$weight})";
             $this->mydb->query($insertQuery);
-            $this->mydb->close();
         } else {
             // If data exists, update
             $updateQuery = "UPDATE schedule SET weight = {$weight} WHERE id = {$checkRows[0]} LIMIT 1";
             $this->mydb->query($updateQuery);
         }
+        $this->mydb->close();
     }
     
     private function showLastWeight($exercise){
         // Show the weight for the last time the exercise was performed
     }
+    
+    public function getAllPrevWeights($user_id){
+        $this->mydb->connect();
+        $checkQuery = "SELECT * FROM exercises";
+        $checkResult = $this->mydb->query($checkQuery);
+        $checkRows = $this->mydb->fetch_array_assoc($checkResult);
+        print_r($checkRows);
 
+        $this->mydb->close();
+                
+    }
+    
     public function addWorkout($data){
         // Add a whole day of exercises all at once from a JSON object which includes user and array of exercises
         $date = $data['date'];

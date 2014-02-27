@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
-<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js" ng-app="weightsApp">
 <head>
     
 <!-- Russell Note: Try AngularJS -->    
     
 <meta charset="utf-8">
-<title></title>
+<title>Weights</title>
 <meta name="description" content="">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -26,11 +25,15 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/main.css">
 
-<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+<!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+<!-- <script src="js/helper.js"></script> -->
+<script src="js/vendor/zepto.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/controller.js"></script>
 
 </head>
 
-<body>
+<body ng-controller="WeightListCtrl">
 
 <?php
 
@@ -41,6 +44,12 @@ for($i=0;$i<=500;$i+=5){
 
 ?>
 
+Testing {{ 'this' }}
+
+<ul>
+    <li ng-repeat="weight in weights">{{weight.name}} {{weight.reps}} {{weight.prevWeight}}</li>
+</ul>
+    
 <!-- Add your site or application content here -->
 <form action="submit.php" id="weightsForm" method="POST">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
@@ -211,9 +220,6 @@ for($i=0;$i<=500;$i+=5){
 </form>
 
 
-<script src="js/vendor/zepto.min.js"></script>
-<script src="js/helper.js"></script>
-<script src="js/main.js"></script>
 
 </body>
 </html>
