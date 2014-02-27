@@ -77,7 +77,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="1" id="1">
+                    <select name="1" id="exSquats">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -89,7 +89,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="11" id="11">
+                    <select name="11" id="exBenchPress">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -101,7 +101,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="2" id="2">
+                    <select name="2" id="exDeadlift">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -113,19 +113,19 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="3" id="3">
+                    <select name="3" id="exStandingPress">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
             <tr class="day-a day-b">
                 <td>
-                    <div class="lift-name">Bent Over Row</div>
+                    <div class="lift-name">Bent Over Rows</div>
                     <div class="set-details">5x5</div>
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="4" id="4">
+                    <select name="4" id="exBentOverRows">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -137,7 +137,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="5" id="5">
+                    <select name="5" id="exBarbellShrugs">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -149,7 +149,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="6" id="6">
+                    <select name="6" id="exCloseGripBenchPress">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -161,7 +161,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="7" id="7">
+                    <select name="7" id="exTricepExtensions">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -173,7 +173,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="8" id="8">
+                    <select name="8" id="exInclineCurls">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -185,7 +185,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="9" id="9">
+                    <select name="9" id="exHyperextensions">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
@@ -197,7 +197,7 @@ Testing {{ 'this' }}
                 </td>
                 <td class="previous-weight">0</td>
                 <td>
-                    <select name="10" id="10">
+                    <select name="10" id="exCableCrunches">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
