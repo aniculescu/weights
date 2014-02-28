@@ -2,8 +2,8 @@ var weightsApp = angular.module('weightsApp', []);
 
 weightsApp.controller('WeightListCtrl', function ($scope, $http) {
     $http.get('/weights/php/getWeights.php').success(function(data){
-        console.log(data.userArray);
-        $scope.weights = data.userArray;
+        $scope.weights = data;
+        console.log($scope.weights);
     });
 });
 

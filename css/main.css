@@ -34,9 +34,9 @@ textarea {resize: vertical; }
 body{}
 #weightsForm{}
 #weightTable{width: 100%;font-size: 20px;font-weight: bold;}
-#weightTable tr.day-a{background: #fe2200;}
-#weightTable tr.day-b{background: #f7eb00;}
-#weightTable tr.day-a.day-b{background: #fa8a00;}
+#weightTable tr.day-A{background: #fe2200;}
+#weightTable tr.day-B{background: #f7eb00;}
+#weightTable tr.day-AB{background: #fa8a00;}
 #weightTable tr th{color: #000;font-size: 0.75em;}
 #weightTable tr th,
 #weightTable tr td{padding: 8px 3px;}

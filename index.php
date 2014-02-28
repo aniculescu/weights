@@ -25,12 +25,6 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/main.css">
 
-<!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
-<!-- <script src="js/helper.js"></script> -->
-<script src="js/vendor/zepto.min.js"></script>
-<script src="js/angular.min.js"></script>
-<script src="js/controller.js"></script>
-
 </head>
 
 <body ng-controller="WeightListCtrl">
@@ -43,12 +37,6 @@ for($i=0;$i<=500;$i+=5){
 }
 
 ?>
-
-Testing {{ 'this' }}
-
-<ul>
-    <li ng-repeat="weight in weights">{{weight.name}} {{weight.reps}} {{weight.prevWeight}}</li>
-</ul>
     
 <!-- Add your site or application content here -->
 <form action="submit.php" id="weightsForm" method="POST">
@@ -70,7 +58,19 @@ Testing {{ 'this' }}
             </tr>
         </thead>
         <tbody>
-            <tr class="day-a day-b">
+            <tr ng-repeat="weight in weights" class="day-{{weight.type}}">
+                <td>
+                    <div class="lift-name">{{weight.name}}</div>
+                    <div class="set-details">{{weight.repetitions}}</div>
+                </td>
+                <td class="previous-weight">{{weight.userData.weight}}</td>
+                <td>
+                    <select name="1" id="ex{{weight.name}}">
+                        <?php echo $weightDropdown; ?>
+                    </select>
+                </td>
+            </tr>
+<!--            <tr class="day-a day-b">
                 <td>
                     <div class="lift-name">Squats</div>
                     <div class="set-details">5x5</div>
@@ -201,7 +201,7 @@ Testing {{ 'this' }}
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
             <tr class="date">
                 <td colspan="3">Date <input id="date" name="date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
             </tr>
@@ -219,7 +219,12 @@ Testing {{ 'this' }}
     <textarea id="jsonOutput"></textarea>
 </form>
 
-
+<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+<script src="js/vendor/zepto.min.js"></script>
+<script src="js/helper.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>

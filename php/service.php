@@ -7,8 +7,14 @@ class Weights
     private $mydb;
     public function __construct(){
         $this->currentDate = date("Y-m-d");
+//        Andrew's db
 //      $this->$mydb = new Database("anw.aniculescu.com", "appconnect", "w0rk1tB1tch", "anw_weight_tracker");   // Could not connect
+//        Russell's db
+//        db Admin Portal: https://p3nlmysqladm002.secureserver.net/grid50/6703/index.php
         $this->mydb = new Database("68.178.216.145 ", "weighttracker", "w0rk1tB1tch!", "weighttracker");
+        /*
+         * 
+         */
     }
 
     public function addExercise(){
@@ -17,7 +23,7 @@ class Weights
 
     private function addWeight($user_id, $exercise, $weight, $date){
         $this->mydb->connect();
-        // Check to see if date/weight combo already exists\
+        // Check to see if date/weight combo already exists
         $checkQuery = "SELECT id FROM schedule WHERE date = '{$date}' AND exercise_id = {$exercise} AND user_id = {$user_id} LIMIT 1";
         $checkResult = $this->mydb->query($checkQuery);
         $checkRows = mysql_fetch_row($checkResult);
@@ -40,13 +46,19 @@ class Weights
     
     public function getAllPrevWeights($user_id){
         $this->mydb->connect();
-        $checkQuery = "SELECT * FROM exercises";
-        $checkResult = $this->mydb->query($checkQuery);
-        $checkRows = $this->mydb->fetch_array_assoc($checkResult);
-        print_r($checkRows);
-
+        // Grab a list of all exercises
+        $allExercisesQuery = "SELECT * FROM exercises ORDER BY id ASC";
+        $allExercises = $this->mydb->fetch_all_array($allExercisesQuery);
+        // Find the weight for the last time the specified user performed the exercise
+        foreach($allExercises as $key => $exercise){
+            $userExerciseQuery = "SELECT * FROM  schedule WHERE user_id = {$user_id} AND exercise_id = {$exercise['id']} ORDER BY date DESC LIMIT 1";
+            $userExercise = $this->mydb->fetch_all_array($userExerciseQuery);
+            if(count($userExercise) > 0){
+                $allExercises[$key]['userData'] = $userExercise[0];
+            }
+        }
         $this->mydb->close();
-                
+        return $allExercises;
     }
     
     public function addWorkout($data){
