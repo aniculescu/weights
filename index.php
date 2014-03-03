@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
 <meta http-equiv="cleartype" content="on">
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
@@ -58,12 +58,12 @@ for($i=0;$i<=500;$i+=5){
         </thead>
         <tbody>
             <tr ng-repeat="weight in weights" class="day-{{weight.type}}">
-                <td>
+                <td class="exercise">
                     <div class="lift-name">{{weight.name}}</div>
                     <div class="set-details">{{weight.repetitions}}</div>
                 </td>
                 <td class="previous-weight">{{weight.userData.weight}}</td>
-                <td>
+                <td class="weight-dropdown">
                     <select name="{{weight.id}}" id="ex{{weight.name}}">
                         <?php echo $weightDropdown; ?>
                     </select>
@@ -88,7 +88,7 @@ for($i=0;$i<=500;$i+=5){
 <script src="js/lib/angular/angular.js"></script>
 <!-- <script src="js/lib/angular/angular-resource.js"></script> -->
 <script src="js/app.js"></script>
-<script src="js/controller.js"></script>
+<script src="js/controllers.js"></script>
 <!-- <script src="js/services.js"></script> -->
 <script src="js/main.js"></script>
 
