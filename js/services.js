@@ -1,9 +1,29 @@
-var weightServices = angular.module('weightServices', ['ngResource']);
+var weightsServices = angular.module('weightsServices', ['ngResource']);
  
-weightServices.factory('Phone', ['$resource',
+weightsServices.factory('Weights', ['$resource',
     function($resource){
-        return $resource('phones/:phoneId.json', {}, {
-            query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
+    	// console.log($resource);
+        return $resource('/weights/php/getWeights.php', {}, {
+            query: {
+            	method : 'GET',
+            	params:{user_id : 2},
+            	isArray:true
+            }
         });
     }]
 );
+ 
+// weightsServices.factory('$http', ['$httpd',
+//     function($http){
+//     	console.log($http);
+//         // return $resource('/weights/php/getWeights.php', {}, {
+//         //     query: {
+//         //     	method : 'GET',
+//         //     	params:{user_id : 2},
+//         //     	isArray:true
+//         //     }
+//         // });
+//     }]
+// );
+
+

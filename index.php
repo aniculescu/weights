@@ -38,14 +38,13 @@ for($i=0;$i<=500;$i+=5){
 
 ?>
     
-<!-- Add your site or application content here -->
 <form action="submit.php" id="weightsForm" method="POST">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
         <thead>
             <tr>
                 <td class="name">Name:</td>
                 <td colspan="2">
-                    <select name="user_id" id="user_id" style="width: 100%;">
+                    <select name="user_id" class="user-id" ng-model="userId">
                         <option value="2">Russell</option>
                         <option value="1">Andrew</option>
                     </select>
@@ -65,143 +64,12 @@ for($i=0;$i<=500;$i+=5){
                 </td>
                 <td class="previous-weight">{{weight.userData.weight}}</td>
                 <td>
-                    <select name="1" id="ex{{weight.name}}">
+                    <select name="{{weight.id}}" id="ex{{weight.name}}">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
-<!--            <tr class="day-a day-b">
-                <td>
-                    <div class="lift-name">Squats</div>
-                    <div class="set-details">5x5</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="1" id="exSquats">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a">
-                <td>
-                    <div class="lift-name">Bench Press</div>
-                    <div class="set-details">5x5</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="11" id="exBenchPress">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-b">
-                <td>
-                    <div class="lift-name">Deadlift</div>
-                    <div class="set-details">1x5</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="2" id="exDeadlift">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-b">
-                <td>
-                    <div class="lift-name">Standing Press</div>
-                    <div class="set-details">5x5</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="3" id="exStandingPress">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a day-b">
-                <td>
-                    <div class="lift-name">Bent Over Rows</div>
-                    <div class="set-details">5x5</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="4" id="exBentOverRows">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a">
-                <td>
-                    <div class="lift-name">Barbell Shrugs</div>
-                    <div class="set-details">3x8</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="5" id="exBarbellShrugs">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-b">
-                <td>
-                    <div class="lift-name">Close Grip Bench Press</div>
-                    <div class="set-details">3x8</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="6" id="exCloseGripBenchPress">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a">
-                <td>
-                    <div class="lift-name">Tricep Extensions</div>
-                    <div class="set-details">3x8</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="7" id="exTricepExtensions">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a day-b">
-                <td>
-                    <div class="lift-name">Incline Curls</div>
-                    <div class="set-details">3x8</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="8" id="exInclineCurls">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a">
-                <td>
-                    <div class="lift-name">Hyperextensions</div>
-                    <div class="set-details">2x10</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="9" id="exHyperextensions">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr class="day-a day-b">
-                <td>
-                    <div class="lift-name">Cable Crunches</div>
-                    <div class="set-details">3x10</div>
-                </td>
-                <td class="previous-weight">0</td>
-                <td>
-                    <select name="10" id="exCableCrunches">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>-->
+
             <tr class="date">
                 <td colspan="3">Date <input id="date" name="date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
             </tr>
@@ -209,21 +77,19 @@ for($i=0;$i<=500;$i+=5){
     </table>
     <div class="footerLinks">
         <div>
-            <button type="submit">Submit</button>
-        </div>
-        <div>
-            <!-- <a href="status.php">Stats</a> -->
-            <a id="showJson" href="#">Show JSON</a>
+            <button class="main-submit" type="submit">Submit</button>
         </div>
     </div>
-    <textarea id="jsonOutput"></textarea>
 </form>
 
-<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+<!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+<!-- <script src="js/helper.js"></script> -->
 <script src="js/vendor/zepto.min.js"></script>
-<script src="js/helper.js"></script>
-<script src="js/angular.min.js"></script>
+<script src="js/lib/angular/angular.js"></script>
+<script src="js/lib/angular/angular-resource.js"></script>
+<script src="js/app.js"></script>
 <script src="js/controller.js"></script>
+<script src="js/services.js"></script>
 <script src="js/main.js"></script>
 
 </body>

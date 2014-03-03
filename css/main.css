@@ -39,15 +39,16 @@ body{}
 #weightTable tr.day-AB{background: #fa8a00;}
 #weightTable tr th{color: #000;font-size: 0.75em;}
 #weightTable tr th,
-#weightTable tr td{padding: 8px 3px;}
+#weightTable tr td{padding: 8px;}
+#weightTable .user-id{width: 100%;}
 #weightTable tr td div.lift-name{font-size: 20px;color: #fff;font-weight: bold;text-shadow: 0 0 6px rgba(0,0,0,0.4);}
 #weightTable tr td div.set-details{font-size: 12px;color: #000;}
 #weightTable tr td.name,
 #weightTable tr.date{color: #000;text-shadow: none;}
-#weightTable tr td.previous{text-align: center;}
+#weightTable tr td.previous-weight{text-align: right;}
 #weightTable tr td.second-time{box-shadow: 0 0 3px #000000 inset;}
-#jsonOutput {display: none;height: 300px; width: 100%; }
 .footerLinks{padding: 10px 0;text-align: center;}
+.footerLinks button.main-submit{width: 100%;font-size: 40px;}
 
 
 
