@@ -27,69 +27,19 @@
 
 </head>
 
-<body ng-controller="WeightListCtrl">
+<body>
 
-<?php
-
-$weightDropdown = '';
-for($i=0;$i<=500;$i+=5){
-    $weightDropdown .= "<option value=\"$i\">$i</option>\n";
-}
-
-?>
-    
-<form action="submit.php" id="weightsForm" method="POST">
-    <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
-        <thead>
-            <tr>
-                <td class="name">Name:</td>
-                <td colspan="2">
-                    <select name="user_id" class="user-id" ng-model="userId" ng-change="showUserWeights()">
-                        <option value="2">Russell</option>
-                        <option value="1">Andrew</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>Exercise</th>
-                <th>Previous</th>
-                <th>Today</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="weight in weights" class="day-{{weight.type}}">
-                <td class="exercise">
-                    <div class="lift-name">{{weight.name}}</div>
-                    <div class="set-details">{{weight.repetitions}}</div>
-                </td>
-                <td class="previous-weight">{{weight.userData.weight}}</td>
-                <td class="weight-dropdown">
-                    <select name="{{weight.id}}" id="ex{{weight.name}}">
-                        <?php echo $weightDropdown; ?>
-                    </select>
-                </td>
-            </tr>
-
-            <tr class="date">
-                <td colspan="3">Date <input id="date" name="date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="footerLinks">
-        <div>
-            <button class="main-submit" type="submit">Submit</button>
-        </div>
-    </div>
-</form>
+<div ui-view></div>
 
 <!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
 <!-- <script src="js/helper.js"></script> -->
 <script src="js/vendor/zepto.min.js"></script>
 <script src="js/lib/angular/angular.js"></script>
-<!-- <script src="js/lib/angular/angular-resource.js"></script> -->
+<script src="js/lib/angular/angular-ui-router.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
 <!-- <script src="js/services.js"></script> -->
+<script src="js/lib/chart.min.js"></script>
 <script src="js/main.js"></script>
 
 </body>

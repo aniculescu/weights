@@ -70,6 +70,7 @@ body{}
 #weightTable tr td.exercise{padding-left: 10px;}
 #weightTable .user-id{width: 100%;}
 #weightTable tr td div.lift-name{font-size: 20px;color: #fff;font-weight: bold;text-shadow: 0 1px 0px rgba(0,0,0,0.4);}
+#weightTable tr td div.lift-name a{text-decoration: inherit;color: inherit;}
 #weightTable tr td div.set-details{font-size: 12px;color: #000;}
 #weightTable tr td.name,
 #weightTable tr.date{color: #000;text-shadow: none;}
@@ -80,6 +81,7 @@ body{}
 .footerLinks{padding: 10px 0;text-align: center;}
 .footerLinks button.main-submit{width: 94%;border: 1px solid #000;border-radius: 14px;font-size: 40px;line-height: 60px;}
 
+#weightsChart{width: 100%;height: 100%;border: 1px solid black;}
 
 /* ==========================================================================
    Helper classes

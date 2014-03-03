@@ -39,22 +39,20 @@ class Weights
         }
         $this->mydb->close();
     }
-    
-    private function showLastWeight($exercise){
-        // Show the weight for the last time the exercise was performed
-    }
-    
-    public function getAllPrevWeights($user_id){
+        
+    public function getAllPrevWeights($userId){
         $this->mydb->connect();
         // Grab a list of all exercises
         $allExercisesQuery = "SELECT * FROM exercises ORDER BY id ASC";
         $allExercises = $this->mydb->fetch_all_array($allExercisesQuery);
-        // Find the weight for the last time the specified user performed the exercise
-        foreach($allExercises as $key => $exercise){
-            $userExerciseQuery = "SELECT * FROM  schedule WHERE user_id = {$user_id} AND exercise_id = {$exercise['id']} ORDER BY date DESC LIMIT 1";
-            $userExercise = $this->mydb->fetch_all_array($userExerciseQuery);
-            if(count($userExercise) > 0){
-                $allExercises[$key]['userData'] = $userExercise[0];
+        if($userId){
+            // Find the weight for the last time the specified user performed the exercise
+            foreach($allExercises as $key => $exercise){
+                $userExerciseQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$exercise['id']} ORDER BY date DESC LIMIT 1";
+                $userExercise = $this->mydb->fetch_all_array($userExerciseQuery);
+                if(count($userExercise) > 0){
+                    $allExercises[$key]['userData'] = $userExercise[0];
+                }
             }
         }
         $this->mydb->close();
@@ -75,6 +73,43 @@ class Weights
             }
         }
     }
+
+    public function getWeightHistory($userId, $weightId){
+        if($userId && $weightId){
+            $numberOfDays = 30;
+            $this->mydb->connect();
+            // Grab a list of all exercises
+            $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$weightId} ORDER BY date ASC LIMIT {$numberOfDays}";
+            $weightHistory = $this->mydb->fetch_all_array($weightHistoryQuery);
+            $this->mydb->close();
+            return $weightHistory;
+        }
+    } 
+}
+
+header('content-type: application/json; charset=utf-8');
+
+$userId = (isset($_GET['user_id'])) ? $_GET['user_id'] : false;
+$weightId = (isset($_GET['weight_id'])) ? $_GET['weight_id'] : false;
+$requestedService = (isset($_GET['service'])) ? $_GET['service'] : false;
+$newWorkout = new Weights();
+
+switch($requestedService){
+    case 'weightsList':
+        // Create array of all possible exercises with data such as name, reps, exercise ID
+        $userData = $newWorkout->getAllPrevWeights($userId);
+        break;
+
+    case 'weightHistory':
+        // Create array of all possible exercises with data such as name, reps, exercise ID
+        $userData = $newWorkout->getWeightHistory($userId, $weightId);
+        break;
+}
+
+if(isset($userData)){
+    // Format JSON or JSONP depending on callback parameter
+    $json = json_encode($userData);
+    echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
 }
 
 ?>
