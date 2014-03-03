@@ -44,7 +44,7 @@ for($i=0;$i<=500;$i+=5){
             <tr>
                 <td class="name">Name:</td>
                 <td colspan="2">
-                    <select name="user_id" class="user-id" ng-model="userId">
+                    <select name="user_id" class="user-id" ng-model="userId" ng-change="showUserWeights()">
                         <option value="2">Russell</option>
                         <option value="1">Andrew</option>
                     </select>
@@ -86,10 +86,10 @@ for($i=0;$i<=500;$i+=5){
 <!-- <script src="js/helper.js"></script> -->
 <script src="js/vendor/zepto.min.js"></script>
 <script src="js/lib/angular/angular.js"></script>
-<script src="js/lib/angular/angular-resource.js"></script>
+<!-- <script src="js/lib/angular/angular-resource.js"></script> -->
 <script src="js/app.js"></script>
 <script src="js/controller.js"></script>
-<script src="js/services.js"></script>
+<!-- <script src="js/services.js"></script> -->
 <script src="js/main.js"></script>
 
 </body>
