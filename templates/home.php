@@ -28,7 +28,7 @@ for($i=0;$i<=500;$i+=5){
         <tbody>
             <tr ng-repeat="weight in weights" class="day-{{weight.type}}">
                 <td class="exercise">
-                    <div class="lift-name"><a href="#/chart/user/{{weight.userData.user_id}}/weight/{{weight.id}}">{{weight.name}}</a></div>
+                    <div class="lift-name" ng-click="showGraph(weight.userData.user_id, weight.id)">{{weight.name}}</div>
                     <div class="set-details">{{weight.repetitions}}</div>
                 </td>
                 <td class="previous-weight">{{weight.userData.weight}}</td>
@@ -50,3 +50,7 @@ for($i=0;$i<=500;$i+=5){
         </div>
     </div>
 </form>
+
+<div id="chartContainer">
+    <canvas id="weightsChart"></canvas>
+</div>

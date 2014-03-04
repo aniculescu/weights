@@ -81,7 +81,9 @@ body{}
 .footerLinks{padding: 10px 0;text-align: center;}
 .footerLinks button.main-submit{width: 94%;border: 1px solid #000;border-radius: 14px;font-size: 40px;line-height: 60px;}
 
-#weightsChart{width: 100%;height: 100%;border: 1px solid black;}
+#chartContainer{top: 0;left: 0;width: 100%;height: 100%;background: #fff;}
+#chartContainer.active{position: absolute;}
+#weightsChart{width: 100%;height: 100%;}
 
 /* ==========================================================================
    Helper classes
