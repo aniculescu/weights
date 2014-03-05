@@ -25,70 +25,37 @@ weightsControllers
 
                 //Get the context of the canvas element we want to select
                 var weightsOptions = {
-                    pointDotRadius : 2,
-                    pointDotStrokeWidth : 0.8,
+                    pointDotRadius : 3,
+                    pointDotStrokeWidth : 1,
                     datasetStrokeWidth : 1,
-                    bezierCurve : true
+                    bezierCurve : true,
+                    scaleGridLineColor : "rgba(0,0,0,0.3)"
                 };
                 var weightsData = {
                     labels : chartLabels,
                     datasets : [
                         {
-                            fillColor : "rgba(220,220,220,0.5)",
-                            strokeColor : "rgba(220,220,220,1)",
-                            pointColor : "rgba(220,220,220,1)",
+                            fillColor : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,1)",
+                            pointColor : "rgba(151,187,205,1)",
                             pointStrokeColor : "#fff",
                             data : chartData
                         }
                     ]
                 }
                 var ctx = $("#weightsChart")[0].getContext("2d");
-                var weightsChart = new Chart(ctx).Line(weightsData, weightsOptions);
-                $('#chartContainer').addClass('active');
-
-
+                // Force 100% width and height 
+                ctx.canvas.width = $('#chartContainer').width() * 0.95;
+                ctx.canvas.height = $('#chartContainer').height() * 0.95;
+                var weightsChart = new Chart(ctx).Bar(weightsData, weightsOptions);
+                $('body').addClass('show-chart');
             });
                 
         }
         $('#chartContainer').click(function(){
-            $(this).removeClass('active');
+            $('body').removeClass('show-chart');
         });
     })
-    .controller('WeightGraphCtrl', function ($scope, $http, $stateParams, $state) {
-        var getString = '/weights/php/service.php?service=weightHistory&user_id=' + $stateParams.userId + '&weight_id=' + $stateParams.weightId;
-        $http.get(getString, {cache: true}).success(function(data){
-            // Prepare data for chart.js
-            var chartLabels = [],
-                chartData = [];
-            data.forEach(function(entry){
-                //Fill the empty arrays
-                chartLabels.push(entry.date);
-                chartData.push(entry.weight);
-            });
-
-            //Get the context of the canvas element we want to select
-            var ctx = $("#weightsChart")[0].getContext("2d");
-            var weightsOptions = {
-                pointDotRadius : 2,
-                pointDotStrokeWidth : 0.8,
-                datasetStrokeWidth : 1,
-                bezierCurve : true
-            };
-            var weightsData = {
-                labels : chartLabels,
-                datasets : [
-                    {
-                        fillColor : "rgba(220,220,220,0.5)",
-                        strokeColor : "rgba(220,220,220,1)",
-                        pointColor : "rgba(220,220,220,1)",
-                        pointStrokeColor : "#fff",
-                        data : chartData
-                    }
-                ]
-            }
-            var weightsChart = new Chart(ctx).Line(weightsData, weightsOptions);
-        });
-    });
 
 var weightsFilters = angular.module('weightsFilters', []);
 weightsFilters

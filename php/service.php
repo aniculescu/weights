@@ -76,7 +76,7 @@ class Weights
 
     public function getWeightHistory($userId, $weightId){
         if($userId && $weightId){
-            $numberOfDays = 30;
+            $numberOfDays = 7;
             $this->mydb->connect();
             // Grab a list of all exercises
             $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$weightId} ORDER BY date ASC LIMIT {$numberOfDays}";

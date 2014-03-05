@@ -31,7 +31,9 @@ textarea {resize: vertical; }
    Author's custom styles
    ========================================================================== */
 
-body{}
+html,
+body{ margin:0; padding:0; height:100%; width:100%; }
+body.show-chart{overflow: hidden;}
 #weightsForm{width: 100%;}
 #weightTable{width: 100%;font-size: 20px;font-weight: bold;
     -moz-box-sizing: border-box;
@@ -82,7 +84,7 @@ body{}
 .footerLinks button.main-submit{width: 94%;border: 1px solid #000;border-radius: 14px;font-size: 40px;line-height: 60px;}
 
 #chartContainer{top: 0;left: 0;width: 100%;height: 100%;background: #fff;}
-#chartContainer.active{position: absolute;}
+body.show-chart #chartContainer{position: fixed;overflow: hidden;}
 #weightsChart{width: 100%;height: 100%;}
 
 /* ==========================================================================
