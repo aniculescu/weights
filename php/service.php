@@ -7,14 +7,7 @@ class Weights
     private $mydb;
     public function __construct(){
         $this->currentDate = date("Y-m-d");
-//        Andrew's db
-//      $this->$mydb = new Database("anw.aniculescu.com", "appconnect", "w0rk1tB1tch", "anw_weight_tracker");   // Could not connect
-//        Russell's db
-//        db Admin Portal: https://p3nlmysqladm002.secureserver.net/grid50/6703/index.php
-        $this->mydb = new Database("68.178.216.145 ", "weighttracker", "w0rk1tB1tch!", "weighttracker");
-        /*
-         * 
-         */
+        $this->mydb = new Database($__dbConfig["hostname"], $__dbConfig["username"], $__dbConfig["password"], $__dbConfig["dbName"]);
     }
 
     public function addExercise(){
@@ -39,20 +32,22 @@ class Weights
         }
         $this->mydb->close();
     }
-        
-    public function getAllPrevWeights($userId){
+    
+    private function showLastWeight($exercise){
+        // Show the weight for the last time the exercise was performed
+    }
+    
+    public function getAllPrevWeights($user_id){
         $this->mydb->connect();
         // Grab a list of all exercises
         $allExercisesQuery = "SELECT * FROM exercises ORDER BY id ASC";
         $allExercises = $this->mydb->fetch_all_array($allExercisesQuery);
-        if($userId){
-            // Find the weight for the last time the specified user performed the exercise
-            foreach($allExercises as $key => $exercise){
-                $userExerciseQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$exercise['id']} ORDER BY date DESC LIMIT 1";
-                $userExercise = $this->mydb->fetch_all_array($userExerciseQuery);
-                if(count($userExercise) > 0){
-                    $allExercises[$key]['userData'] = $userExercise[0];
-                }
+        // Find the weight for the last time the specified user performed the exercise
+        foreach($allExercises as $key => $exercise){
+            $userExerciseQuery = "SELECT * FROM  schedule WHERE user_id = {$user_id} AND exercise_id = {$exercise['id']} ORDER BY date DESC LIMIT 1";
+            $userExercise = $this->mydb->fetch_all_array($userExerciseQuery);
+            if(count($userExercise) > 0){
+                $allExercises[$key]['userData'] = $userExercise[0];
             }
         }
         $this->mydb->close();
@@ -73,43 +68,6 @@ class Weights
             }
         }
     }
-
-    public function getWeightHistory($userId, $weightId){
-        if($userId && $weightId){
-            $numberOfDays = 7;
-            $this->mydb->connect();
-            // Grab a list of all exercises
-            $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$weightId} ORDER BY date ASC LIMIT {$numberOfDays}";
-            $weightHistory = $this->mydb->fetch_all_array($weightHistoryQuery);
-            $this->mydb->close();
-            return $weightHistory;
-        }
-    } 
-}
-
-header('content-type: application/json; charset=utf-8');
-
-$userId = (isset($_GET['user_id'])) ? $_GET['user_id'] : false;
-$weightId = (isset($_GET['weight_id'])) ? $_GET['weight_id'] : false;
-$requestedService = (isset($_GET['service'])) ? $_GET['service'] : false;
-$newWorkout = new Weights();
-
-switch($requestedService){
-    case 'weightsList':
-        // Create array of all possible exercises with data such as name, reps, exercise ID
-        $userData = $newWorkout->getAllPrevWeights($userId);
-        break;
-
-    case 'weightHistory':
-        // Create array of all possible exercises with data such as name, reps, exercise ID
-        $userData = $newWorkout->getWeightHistory($userId, $weightId);
-        break;
-}
-
-if(isset($userData)){
-    // Format JSON or JSONP depending on callback parameter
-    $json = json_encode($userData);
-    echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
 }
 
 ?>

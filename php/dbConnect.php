@@ -1,4 +1,5 @@
 <?php
+require_once("__dbConfig.php");
 class Database {
  
     private $host;
@@ -108,6 +109,7 @@ class Database {
             $this->error = mysql_error();
             $this->errno = mysql_errno();
         }
+        echo "DB Error";
         if (PHP_SAPI !== 'cli') {
         ?>
  
