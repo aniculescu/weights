@@ -1,0 +1,9 @@
+<?php
+
+$__dbConfig = array(
+	"username" => "",
+	"hostname" => "",
+	"password" => "",
+	"dbName" => ""
+	);
+?>
