@@ -3,3 +3,5 @@
 nbproject/project.properties
 nbproject/project.xml
 __*
+.project
+php/dbConfig.php

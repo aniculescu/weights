@@ -1,7 +1,7 @@
 <?php
-require_once("__dbConfig.php");
+require_once("dbConfig.php");
 class Database {
- 
+    
     private $host;
     private $user;
     private $pass;

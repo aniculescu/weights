@@ -7,7 +7,7 @@ for($i=0;$i<=500;$i+=5){
 
 ?>
     
-<form action="submit.php" id="weightsForm" method="POST" ng-controller="WeightListCtrl">
+<form action="submit.php" id="weightsForm" method="GET" ng-controller="WeightListCtrl">
     <table id="weightTable" cellspacing="0" cellpadding="0" border="0">
         <thead>
             <tr>

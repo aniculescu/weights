@@ -16,6 +16,7 @@ class Weights
     }
 
     private function addWeight($user_id, $exercise, $weight, $date){
+        $this->mydb->connect();
         // Check to see if date/weight combo already exists
         $checkQuery = "SELECT id FROM schedule WHERE date = '{$date}' AND exercise_id = {$exercise} AND user_id = {$user_id} LIMIT 1";
         $checkResult = $this->mydb->query($checkQuery);
@@ -30,9 +31,11 @@ class Weights
             $updateQuery = "UPDATE schedule SET weight = {$weight} WHERE id = {$checkRows[0]} LIMIT 1";
             $this->mydb->query($updateQuery);
         }
+        $this->mydb->close();
     }
         
     public function getAllPrevWeights($userId){
+        $this->mydb->connect();
         // Grab a list of all exercises
         $allExercisesQuery = "SELECT * FROM exercises ORDER BY id ASC";
         $allExercises = $this->mydb->fetch_all_array($allExercisesQuery);
@@ -46,6 +49,7 @@ class Weights
                 }
             }
         }
+        $this->mydb->close();
         return $allExercises;
     }
     
@@ -67,9 +71,12 @@ class Weights
     public function getWeightHistory($userId, $weightId){
         if($userId && $weightId){
             $numberOfDays = 7;
+            $this->mydb->connect();
             // Grab a list of all exercises
-            $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$weightId} ORDER BY date ASC LIMIT {$numberOfDays}";
+            $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$weightId} ORDER BY date DESC LIMIT {$numberOfDays}";
             $weightHistory = $this->mydb->fetch_all_array($weightHistoryQuery);
+            $weightHistory = array_reverse($weightHistory);
+			$this->mydb->close();
             return $weightHistory;
         }
     } 

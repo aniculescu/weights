@@ -2,8 +2,6 @@
 <html class="no-js" ng-app="weightsApp">
 <head>
     
-<!-- Russell Note: Try AngularJS -->    
-    
 <meta charset="utf-8">
 <title>Weights</title>
 <meta name="description" content="">
