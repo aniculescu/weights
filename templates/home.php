@@ -1,6 +1,6 @@
 <?php
 
-$weightDropdown = '';
+$weightDropdown = '<option value=\"0\">-</option>\n';
 for($i=0;$i<=500;$i+=5){
     $weightDropdown .= "<option value=\"$i\">$i</option>\n";
 }
@@ -26,31 +26,31 @@ for($i=0;$i<=500;$i+=5){
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="weight in weights" class="day-{{weight.type}}">
+            <tr ng-repeat="exercise in exercises" class="day-{{exercise.type}}">
                 <td class="exercise">
-                    <div class="lift-name" ng-click="showGraph(weight.userData.user_id, weight.id)">{{weight.name}}</div>
-                    <div class="set-details">{{weight.repetitions}}</div>
+                    <div class="lift-name" ng-click="showGraph(exercise.userData.user_id, exercise.id)">{{exercise.name}}</div>
+                    <div class="set-details">{{exercise.repetitions}}</div>
                 </td>
-                <td class="previous-weight">{{weight.userData.weight}}</td>
+                <td class="previous-weight">{{exercise.userData.weight}}</td>
                 <td class="weight-dropdown">
-                    <select name="{{weight.id}}" id="ex{{weight.name|nospaces}}">
+                    <select name="{{exercise.id}}" id="ex{{exercise.name|nospaces}}" ng-model="weight" ng-change="addSingleExercise(userId, exercise.id, weight, todaysDate)">
                         <?php echo $weightDropdown; ?>
                     </select>
                 </td>
             </tr>
 
             <tr class="date">
-                <td colspan="3">Date <input id="date" name="date" type="text" value="<?php echo date("Y-m-d"); ?>"></td>
+                <td colspan="3">Date <input id="date" name="date" type="text" ng-model="todaysDate"></td>
             </tr>
         </tbody>
     </table>
-    <div class="footerLinks">
+<!--    <div class="footerLinks">
         <div>
             <button class="main-submit" type="submit">Submit</button>
         </div>
-    </div>
+    </div>  .footerLinks -->
 </form>
 
 <div id="chartContainer">
     <canvas id="weightsChart"></canvas>
-</div>
+</div> <!-- #chartContainer -->

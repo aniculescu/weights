@@ -1,17 +1,21 @@
 var weightsControllers = angular.module('weightsControllers', []);
 weightsControllers
-    .controller('WeightListCtrl', function ($scope, $http) {
+    .controller('WeightListCtrl', function ($scope, $http, $filter) {
+        var date = new Date();
         $scope.userId = 2;
+        $scope.weight = 0;
+        $scope.todaysDate = $filter('date')(date, "yyyy-MM-dd");
+
         $scope.showUserWeights = function(){
             var getString = '/weights/php/service.php?service=weightsList&user_id=' + $scope.userId;
             $http.get(getString, {cache: true}).success(function(data){
-                $scope.weights = data;
+                $scope.exercises = data;
             });
         }
         $scope.showUserWeights();
 
-        $scope.showGraph = function(userId, weightId){
-            var getString = '/weights/php/service.php?service=weightHistory&user_id=' + userId + '&weight_id=' + weightId;
+        $scope.showGraph = function(userId, exerciseId){
+            var getString = '/weights/php/service.php?service=weightHistory&user_id=' + userId + '&weight_id=' + exerciseId;
             $http.get(getString, {cache: true}).success(function(data){
                 // $('#chartContainer').show();
                 // Prepare data for chart.js
@@ -50,8 +54,21 @@ weightsControllers
                 var weightsChart = new Chart(ctx).Bar(weightsData, weightsOptions);
                 $('body').addClass('show-chart');
             });
-                
         }
+
+        $scope.addSingleExercise = function(userId, exerciseId, weight, date){
+//            console.log("userId: " + userId);
+//            console.log("exerciseId: " + exerciseId);
+//            console.log("weight: " + weight);
+//            console.log("date: " + date);
+            var getString = '/weights/php/service.php?service=addWeight&user_id=' + userId + '&weight_id=' + exerciseId + '&weight=' + weight + '&date=' + date;
+//            console.log(getString);
+            $http.get(getString, {cache : false}).success(function(data){
+//                console.log(data);
+//                $scope.showUserWeights();
+            });
+        }
+
         $('#chartContainer').click(function(){
             $('body').removeClass('show-chart');
         });

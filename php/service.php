@@ -15,7 +15,9 @@ class Weights
         // Add a new exercise to the list of exercises
     }
 
-    private function addWeight($user_id, $exercise, $weight, $date){
+    public function addWeight($user_id, $exercise, $weight, $date){
+        $jsonSuccess = "{'success' : true}";
+        $jsonFalse = "{'success' : false}";
         $this->mydb->connect();
         // Check to see if date/weight combo already exists
         $checkQuery = "SELECT id FROM schedule WHERE date = '{$date}' AND exercise_id = {$exercise} AND user_id = {$user_id} LIMIT 1";
@@ -23,15 +25,24 @@ class Weights
         $checkRows = mysql_fetch_row($checkResult);
                 
         if(!$checkRows){
-            // If data does not exist, add new row
-            $insertQuery = "INSERT INTO schedule (date, user_id, exercise_id, weight) VALUES ('{$date}',{$user_id},{$exercise},{$weight})";
-            $this->mydb->query($insertQuery);
+            if($weight > 0){
+                // If data does not exist, add new row
+                $insertQuery = "INSERT INTO schedule (date, user_id, exercise_id, weight) VALUES ('{$date}',{$user_id},{$exercise},{$weight})";
+                $this->mydb->query($insertQuery);
+            }
         } else {
-            // If data exists, update
-            $updateQuery = "UPDATE schedule SET weight = {$weight} WHERE id = {$checkRows[0]} LIMIT 1";
-            $this->mydb->query($updateQuery);
+            if($weight == 0) {
+                // If weight equals 0, delete the row
+                $deleteQuery = "DELETE FROM schedule WHERE id = {$checkRows[0]} LIMIT 1";
+                $this->mydb->query($deleteQuery);
+            } else {
+                // If data exists, update
+                $updateQuery = "UPDATE schedule SET weight = {$weight} WHERE id = {$checkRows[0]} LIMIT 1";
+                $this->mydb->query($updateQuery);
+            }
         }
         $this->mydb->close();
+        return $jsonSuccess;
     }
         
     public function getAllPrevWeights($userId){
@@ -68,24 +79,26 @@ class Weights
         }
     }
 
-    public function getWeightHistory($userId, $weightId){
-        if($userId && $weightId){
+    public function getWeightHistory($userId, $exerciseId){
+        if($userId && $exerciseId){
             $numberOfDays = 7;
             $this->mydb->connect();
             // Grab a list of all exercises
-            $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$weightId} ORDER BY date DESC LIMIT {$numberOfDays}";
+            $weightHistoryQuery = "SELECT * FROM  schedule WHERE user_id = {$userId} AND exercise_id = {$exerciseId} ORDER BY date DESC LIMIT {$numberOfDays}";
             $weightHistory = $this->mydb->fetch_all_array($weightHistoryQuery);
             $weightHistory = array_reverse($weightHistory);
-			$this->mydb->close();
+	    $this->mydb->close();
             return $weightHistory;
         }
     } 
 }
 
-header('content-type: application/json; charset=utf-8');
+//header('content-type: application/json; charset=utf-8');
 
 $userId = (isset($_GET['user_id'])) ? $_GET['user_id'] : false;
-$weightId = (isset($_GET['weight_id'])) ? $_GET['weight_id'] : false;
+$exerciseId = (isset($_GET['weight_id'])) ? $_GET['weight_id'] : false;
+$weight = (isset($_GET['weight'])) ? $_GET['weight'] : false;
+$date = (isset($_GET['date'])) ? $_GET['date'] : false;
 $requestedService = (isset($_GET['service'])) ? $_GET['service'] : false;
 $newWorkout = new Weights();
 
@@ -97,7 +110,12 @@ switch($requestedService){
 
     case 'weightHistory':
         // Create array of all possible exercises with data such as name, reps, exercise ID
-        $userData = $newWorkout->getWeightHistory($userId, $weightId);
+        $userData = $newWorkout->getWeightHistory($userId, $exerciseId);
+        break;
+
+    case 'addWeight':
+        // Create array of all possible exercises with data such as name, reps, exercise ID
+        $userData = $newWorkout->addWeight($userId, $exerciseId, $weight, $date);
         break;
 }
 
