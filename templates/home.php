@@ -44,13 +44,7 @@ for($i=0;$i<=500;$i+=5){
             </tr>
         </tbody>
     </table>
-<!--    <div class="footerLinks">
-        <div>
-            <button class="main-submit" type="submit">Submit</button>
-        </div>
-    </div>  .footerLinks -->
 </form>
 
 <div id="chartContainer">
-    <canvas id="weightsChart"></canvas>
 </div> <!-- #chartContainer -->

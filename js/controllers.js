@@ -24,35 +24,44 @@ weightsControllers
                 data.forEach(function(entry){
                     //Fill the empty arrays
                     chartLabels.push(entry.date);
-                    chartData.push(entry.weight);
+                    chartData.push(parseInt(entry.weight));
                 });
+                console.log(chartLabels);
+                console.log(chartData);
 
                 //Get the context of the canvas element we want to select
-                var weightsOptions = {
-                    pointDotRadius : 3,
-                    pointDotStrokeWidth : 1,
-                    datasetStrokeWidth : 1,
-                    bezierCurve : true,
-                    scaleGridLineColor : "rgba(0,0,0,0.3)"
-                };
-                var weightsData = {
-                    labels : chartLabels,
-                    datasets : [
-                        {
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)",
-                            pointColor : "rgba(151,187,205,1)",
-                            pointStrokeColor : "#fff",
-                            data : chartData
-                        }
-                    ]
-                }
-                var ctx = $("#weightsChart")[0].getContext("2d");
-                // Force 100% width and height 
-                ctx.canvas.width = $('#chartContainer').width() * 0.95;
-                ctx.canvas.height = $('#chartContainer').height() * 0.95;
-                var weightsChart = new Chart(ctx).Bar(weightsData, weightsOptions);
+
                 $('body').addClass('show-chart');
+                $('#chartContainer').highcharts({
+                    chart: {
+                        type: 'column',
+                        inverted: false,
+                        events: {
+                            click: function(){
+                                $('body').removeClass('show-chart');
+                            }
+                        }
+                    },
+                    legend: {enabled: false},
+                    plotOptions: {
+                        column: {
+                            dataLabels: {enabled: true },
+                            enableMouseTracking: false
+                        }
+                    },
+                    title: {text: 'Weight'},
+                    xAxis: {
+                        categories: chartLabels
+                    },
+                    yAxis: {
+                        title: {text: 'Pounds'},
+                        tickInterval: 5
+                    },
+                    series: [{
+                        name: userId,
+                        data: chartData
+                    }]
+                });
             });
         }
 
@@ -62,17 +71,12 @@ weightsControllers
 //            console.log("weight: " + weight);
 //            console.log("date: " + date);
             var getString = '/weights/php/service.php?service=addWeight&user_id=' + userId + '&weight_id=' + exerciseId + '&weight=' + weight + '&date=' + date;
-//            console.log(getString);
             $http.get(getString, {cache : false}).success(function(data){
 //                console.log(data);
 //                $scope.showUserWeights();
             });
         }
-
-        $('#chartContainer').click(function(){
-            $('body').removeClass('show-chart');
-        });
-    })
+    });
 
 var weightsFilters = angular.module('weightsFilters', []);
 weightsFilters

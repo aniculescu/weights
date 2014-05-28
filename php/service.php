@@ -93,7 +93,7 @@ class Weights
     } 
 }
 
-//header('content-type: application/json; charset=utf-8');
+header('content-type: application/json; charset=utf-8');
 
 $userId = (isset($_GET['user_id'])) ? $_GET['user_id'] : false;
 $exerciseId = (isset($_GET['weight_id'])) ? $_GET['weight_id'] : false;

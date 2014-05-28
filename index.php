@@ -31,13 +31,14 @@
 
 <!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
 <!-- <script src="js/helper.js"></script> -->
-<script src="js/vendor/zepto.min.js"></script>
+<!-- <script src="js/vendor/zepto.min.js"></script> -->
+<script src="js/vendor/jquery-1.11.1.min"></script>
+<script src="js/lib/highcharts.min.js"></script>
 <script src="js/lib/angular/angular.js"></script>
 <script src="js/lib/angular/angular-ui-router.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
 <!-- <script src="js/services.js"></script> -->
-<script src="js/lib/chart.min.js"></script>
 <script src="js/main.js"></script>
 
 </body>
