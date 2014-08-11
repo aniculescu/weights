@@ -17,7 +17,6 @@ weightsControllers
         $scope.showGraph = function(userId, exerciseId){
             var getString = '/weights/php/service.php?service=weightHistory&user_id=' + userId + '&weight_id=' + exerciseId;
             $http.get(getString, {cache: true}).success(function(data){
-                // $('#chartContainer').show();
                 // Prepare data for chart.js
                 var chartLabels = [],
                     chartData = [];
