@@ -1,6 +1,7 @@
 (function(){
     /* Hide A */
-    $('tr.day-B select').on("change", function(){
+    $('body').on("change", "tr.day-B select", function(){
+        console.log('Day B detected');
         var aDays = $('tr.day-A');
         if($(this).val() > 0){
             aDays.hide();
@@ -10,7 +11,8 @@
     });
 
     /* Hide B days */
-    $('tr.day-A select').on("change", function(){
+    $('body').on("change", "tr.day-A select", function(){
+        console.log('Day A detected');
         var bDays = $('tr.day-B');
         if($(this).val() > 0){
             bDays.hide();
