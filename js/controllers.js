@@ -19,10 +19,9 @@ weightsControllers
 
         $scope.updateDate = function(){
             $scope.todaysDate = $scope.todaysYear + "-" + $scope.todaysMonth + "-" + $scope.todaysDay;
-            console.log($scope.todaysDate);
         }
 
-        $scope.showGraph = function(userId, exerciseId){
+        $scope.showGraph = function(userId, exerciseId, exerciseName){
             var getString = '../php/service.php?service=weightHistory&user_id=' + userId + '&weight_id=' + exerciseId;
             $http.get(getString, {cache: true}).success(function(data){
                 // Prepare data for chart.js
@@ -33,8 +32,6 @@ weightsControllers
                     chartLabels.push(entry.date);
                     chartData.push(parseInt(entry.weight));
                 });
-                console.log(chartLabels);
-                console.log(chartData);
 
                 //Get the context of the canvas element we want to select
                 $('body').addClass('show-chart');
@@ -55,7 +52,7 @@ weightsControllers
                             enableMouseTracking: false
                         }
                     },
-                    title: {text: 'Weight'},
+                    title: {text: exerciseName},
                     xAxis: {
                         categories: chartLabels
                     },
