@@ -4,18 +4,26 @@ weightsControllers
         var date = new Date();
         $scope.userId = 2;
         $scope.weight = 0;
+        $scope.todaysDay = $filter('date')(date, "dd");
+        $scope.todaysYear = $filter('date')(date, "yyyy");
+        $scope.todaysMonth = $filter('date')(date, "MM");
         $scope.todaysDate = $filter('date')(date, "yyyy-MM-dd");
-
+        
         $scope.showUserWeights = function(){
-            var getString = '/weights/php/service.php?service=weightsList&user_id=' + $scope.userId;
+            var getString = '../php/service.php?service=weightsList&user_id=' + $scope.userId;
             $http.get(getString, {cache: true}).success(function(data){
                 $scope.exercises = data;
             });
         }
         $scope.showUserWeights();
 
+        $scope.updateDate = function(){
+            $scope.todaysDate = $scope.todaysYear + "-" + $scope.todaysMonth + "-" + $scope.todaysDay;
+            console.log($scope.todaysDate);
+        }
+
         $scope.showGraph = function(userId, exerciseId){
-            var getString = '/weights/php/service.php?service=weightHistory&user_id=' + userId + '&weight_id=' + exerciseId;
+            var getString = '../php/service.php?service=weightHistory&user_id=' + userId + '&weight_id=' + exerciseId;
             $http.get(getString, {cache: true}).success(function(data){
                 // Prepare data for chart.js
                 var chartLabels = [],
@@ -29,7 +37,6 @@ weightsControllers
                 console.log(chartData);
 
                 //Get the context of the canvas element we want to select
-
                 $('body').addClass('show-chart');
                 $('#chartContainer').highcharts({
                     chart: {
@@ -65,15 +72,9 @@ weightsControllers
         }
 
         $scope.addSingleExercise = function(userId, exerciseId, weight, date){
-//            console.log("userId: " + userId);
-//            console.log("exerciseId: " + exerciseId);
-//            console.log("weight: " + weight);
-//            console.log("date: " + date);
-            var getString = '/weights/php/service.php?service=addWeight&user_id=' + userId + '&weight_id=' + exerciseId + '&weight=' + weight + '&date=' + date;
-            $http.get(getString, {cache : false}).success(function(data){
-//                console.log(data);
-//                $scope.showUserWeights();
-            });
+            // Add exercise to db as soon as user chooses weight in dropdown
+            var getString = '../php/service.php?service=addWeight&user_id=' + userId + '&weight_id=' + exerciseId + '&weight=' + weight + '&date=' + date;
+            $http.get(getString, {cache : false}).success(function(data){});
         }
     });
 

@@ -3,7 +3,7 @@ var weightsServices = angular.module('weightsServices', ['ngResource']);
 weightsServices.factory('Weights', ['$resource',
     function($resource){
     	// console.log($resource);
-        return $resource('/weights/php/getWeights.php', {}, {
+        return $resource('../php/getWeights.php', {}, {
             query: {
             	method : 'GET',
             	params:{user_id : 2},
@@ -16,7 +16,7 @@ weightsServices.factory('Weights', ['$resource',
 // weightsServices.factory('$http', ['$httpd',
 //     function($http){
 //     	console.log($http);
-//         // return $resource('/weights/php/getWeights.php', {}, {
+//         // return $resource('../php/getWeights.php', {}, {
 //         //     query: {
 //         //     	method : 'GET',
 //         //     	params:{user_id : 2},
